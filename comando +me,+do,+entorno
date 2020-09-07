@@ -1,0 +1,93 @@
+//////////////////// +ME ///////////////////
+
+client.on("message", async message => {
+
+	if(message.author.bot) return;
+	if(!message.guild) return;
+	if(!message.content.startsWith(config.prefix)) return;
+	// si el mensaje lo manda un bot, return
+	// si el mensaje no se manda en un server, return
+	// si el mensaje no empieza con el prefijo +, return
+	
+	
+	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+	const cmd = args.shift().toLowerCase();
+	const texto = args.join(" ")
+	//args = es el conjunto de palabras despues del prefijo y (la primera palabra => (cmd))
+	//cmd = es la palabra siguiente al prefijo en este caso es me
+	//cmd === me
+	//args === llora, se sienta, etc
+
+	if(cmd === "me") {
+		if(message.deletable) message.delete();
+		
+		if(!texto) return message.reply("Tienes que escribir una accion!") //.then(message.delete);
+	// Respuesta en caso de no escribir y borrar el mensaje si es posible
+	
+	
+		var embed = new Discord.MessageEmbed()
+		.setTitle("Accion del jugador")
+		.setAuthor(message.member.displayName, message.author.displayAvatarURL())
+		.setDescription(texto)
+		.setColor("RED")
+		.setFooter("comando +me")
+		message.channel.send(embed)	
+	}
+});
+
+//////////////////////////// +DO ////////////////////////////
+
+client.on("message", async message => {
+
+	if(message.author.bot) return;
+	if(!message.guild) return;
+	if(!message.content.startsWith(config.prefix)) return;
+	
+	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+	const cmd = args.shift().toLowerCase();
+	const texto = args.join(" ")
+
+	if(cmd === "do") {
+		if(message.deletable) message.delete();
+		
+		if(!texto) return message.reply("Debes escribir una accion del entorno!") //.then(message.delete);
+			
+		let embed = new Discord.MessageEmbed()
+		.setTitle("Situacion del entorno")
+		.setAuthor(message.member.displayName, message.author.displayAvatarURL())
+		.setDescription(texto)
+		.setColor("BLUE")
+		.setFooter("comando +do")
+		
+		message.channel.send(embed)
+	}
+});
+
+
+/////////////////////////// +ENTORNO ////////////////////////
+
+client.on("message", async message => {
+
+	if(message.author.bot) return;
+	if(!message.guild) return;
+	if(!message.content.startsWith(config.prefix)) return;
+	
+	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+	const cmd = args.shift().toLowerCase();
+	const texto = args.join(" ")
+
+	if(cmd === "entorno") {
+		if(message.deletable) message.delete();
+		
+		if(!texto) return message.reply("Debes escribir un entorno!") //.then(message.delete);
+			
+		let embed = new Discord.MessageEmbed()
+		.setTitle("Entorno anónimo")
+		//.setAuthor("Anónimo")
+		.setDescription(texto)
+		.setColor("BLACK")
+		.setFooter("comando +entorno")
+		
+		message.channel.send(embed)
+	}
+});
